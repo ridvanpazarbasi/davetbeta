@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "151880325676",
+    "firebase_url": "https://davet360beta.firebaseio.com",
+    "project_id": "davet360beta",
+    "storage_bucket": "davet360beta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151880325676:android:b9552e6c7356c01f240f89",
+        "android_client_info": {
+          "package_name": "com.example.davet360"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151880325676-m1est6l8brst51j0ds8juuv3meh20208.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.davet360",
+            "certificate_hash": "c7e1acd6929761418cc77db879df28330ffdacc5"
+          }
+        },
+        {
+          "client_id": "151880325676-vbkos8qh0ikb0fqets690h74n0faas3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAoWbPT2K1oTxO6F3xgcVrUpLhvkrDNck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151880325676-vbkos8qh0ikb0fqets690h74n0faas3s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
