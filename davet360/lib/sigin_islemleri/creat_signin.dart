@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class KayitSayafsi extends StatefulWidget {
+  final Function(FirebaseUser) onSigIn;
+  KayitSayafsi({Key key, this.onSigIn}) : super(key: key);
+
   @override
   _KayitSayafsiState createState() => _KayitSayafsiState();
 }
@@ -9,9 +12,8 @@ class KayitSayafsi extends StatefulWidget {
 class _KayitSayafsiState extends State<KayitSayafsi> {
   final _formKey = GlobalKey<FormState>();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
   String _email, _sifre;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class _KayitSayafsiState extends State<KayitSayafsi> {
         child: Form(
           key: _formKey,
           child: Container(
-            height: 700,
+            height: MediaQuery.of(context).size.height + 20,
             color: Colors.grey[200],
             child: Column(
               children: <Widget>[
@@ -154,13 +156,13 @@ class _KayitSayafsiState extends State<KayitSayafsi> {
     final form = _formKey.currentState;
     if (_formKey.currentState.validate()) {
       form.save();
-      AuthResult result = await FirebaseAuth.instance
+      AuthResult _result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _sifre);
-      FirebaseUser user = result.user;
-    }
-  }
 
-  void signOut() {
-    FirebaseAuth.instance.signOut();
+      widget.onSigIn(_result.user);
+      // ignore: unused_local_variable
+      FirebaseUser user = _result.user;
+    }
+    
   }
 }

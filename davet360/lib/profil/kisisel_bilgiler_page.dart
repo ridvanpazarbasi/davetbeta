@@ -28,8 +28,7 @@ class _KisiselBilgilerState extends State<KisiselBilgiler> {
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 75),
+        title: Center(
           child: Text(
             "Davet360",
             style: TextStyle(color: Colors.black, fontSize: 25),

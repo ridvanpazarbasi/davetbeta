@@ -1,5 +1,7 @@
 //***************BİLGİLENDİRME 1. SAYFASI ***********************
 
+import 'package:davet360/etkinlik/etkinlik_olustur.dart';
+import 'package:davet360/sigin_islemleri/signin_giris.dart';
 import 'package:flutter/material.dart';
 
 class Bilgilendirme extends StatefulWidget {
@@ -11,6 +13,7 @@ class _BilgilendirmeState extends State<Bilgilendirme> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         elevation: 0,
@@ -38,6 +41,9 @@ class _BilgilendirmeState extends State<Bilgilendirme> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 150,
+              ),
               InkWell(
                 onTap: () {
                   Navigator.of(context).push(
@@ -62,7 +68,13 @@ class _BilgilendirmeState extends State<Bilgilendirme> {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SignInGiris(),
+                    ),
+                  );
+                },
                 child: Text("Atla"),
               ),
             ],
@@ -83,6 +95,7 @@ class _Bilgilendirme2State extends State<Bilgilendirme2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         elevation: 0,
@@ -112,7 +125,7 @@ class _Bilgilendirme2State extends State<Bilgilendirme2> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 150,
               ),
               InkWell(
                 onTap: () {
@@ -138,7 +151,13 @@ class _Bilgilendirme2State extends State<Bilgilendirme2> {
                 ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SignInGiris(),
+                    ),
+                  );
+                },
                 child: Text("Atla"),
               ),
             ],
@@ -159,6 +178,7 @@ class _Bilgilendirme3State extends State<Bilgilendirme3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.grey[200],
         elevation: 0,
@@ -175,7 +195,10 @@ class _Bilgilendirme3State extends State<Bilgilendirme3> {
               ),
               Text(
                 "Katılamıyorsan Üzülme",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "gilroy/gilroy_black.ttf"),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -188,11 +211,15 @@ class _Bilgilendirme3State extends State<Bilgilendirme3> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 150,
               ),
               InkWell(
                 onTap: () {
-                  debugPrint("BASILDI Giriş");
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => EtkinlikOlustur(),
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -1,5 +1,4 @@
-import 'package:davet360/bilgilendirme.dart';
-import 'package:davet360/sigin_islemleri/signin_giris.dart';
+import 'package:davet360/model/catogory_secim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SignInGiris(),
+      home: CatagorySecimModel(),
     );
   }
 }

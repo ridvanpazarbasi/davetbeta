@@ -1,18 +1,26 @@
+import 'package:davet360/model/user_model.dart';
 import 'package:davet360/sigin_islemleri/creat_signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 class SignInGiris extends StatefulWidget {
+  final Function(FirebaseUser) onSigIn;
+  final Function(FacebookLogin) onFacebookSignIn;
+
+  SignInGiris({Key key, this.onSigIn, this.onFacebookSignIn}) : super(key: key);
+
   @override
   _SignInGirisState createState() => _SignInGirisState();
 }
 
 class _SignInGirisState extends State<SignInGiris> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
+
   String _email, _sifre;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +37,7 @@ class _SignInGirisState extends State<SignInGiris> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: 700,
+          height: 800,
           color: Colors.grey[200],
           child: Form(
             key: _formKey,
@@ -109,7 +117,10 @@ class _SignInGirisState extends State<SignInGiris> {
                   ],
                 ),
                 InkWell(
-                  onTap: () => _validateSubmitRegister(),
+                  onTap: () {
+                    _validateSubmitRegister();
+                    
+                  },
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.deepPurple,
@@ -131,9 +142,7 @@ class _SignInGirisState extends State<SignInGiris> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       InkWell(
-                        onTap: () {
-                          debugPrint("BASILDI Giriş");
-                        },
+                        onTap: () => siginFacebook(),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Color(0xFF334D92),
@@ -187,7 +196,52 @@ class _SignInGirisState extends State<SignInGiris> {
       form.save();
       AuthResult result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email, password: _sifre);
+      widget.onSigIn(result.user);
+
+      // ignore: unused_local_variable
       FirebaseUser user = result.user;
     }
+  }
+
+  User _userFromFirebase(FirebaseUser user) {
+    if (user == null) {
+      return null;
+    } else {
+      return User(userID: user.uid, email: user.email);
+    }
+  }
+
+  Future siginFacebook() async {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    final _facebookLogIn = FacebookLogin();
+    FacebookLoginResult _faceResult =
+        await _facebookLogIn.logIn(["public_profile", "email"]);
+    switch (_faceResult.status) {
+      case FacebookLoginStatus.loggedIn:
+        if (_faceResult.accessToken != null &&
+            _faceResult.accessToken.isValid()) {
+          AuthResult _firebaseResult = await _firebaseAuth.signInWithCredential(
+              FacebookAuthProvider.getCredential(
+                  accessToken: _faceResult.accessToken.token));
+          widget.onSigIn(_firebaseResult.user);
+          FirebaseUser _user = _firebaseResult.user;
+          return _userFromFirebase(_user);
+        } else {
+          /* print("access token valid :" +
+                                  _faceResult.accessToken.isValid().toString());*/
+        }
+
+        break;
+
+      case FacebookLoginStatus.cancelledByUser:
+        print("kullanıcı facebook girişi iptal etti");
+        break;
+
+      case FacebookLoginStatus.error:
+        print("Hata cıktı :" + _faceResult.errorMessage);
+        break;
+    }
+
+    return null;
   }
 }

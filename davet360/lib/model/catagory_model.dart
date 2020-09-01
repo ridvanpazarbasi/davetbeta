@@ -1,4 +1,5 @@
 class Catagory {
+  final String categoryID;
   final String dogumGunu;
   final String yeniIs;
   final String dugun;
@@ -20,6 +21,7 @@ class Catagory {
       'tebrik': tebrik,
       "dogum": dogum,
       "diger": diger,
+      "categoryID":categoryID,
     };
   }
 
@@ -32,11 +34,12 @@ class Catagory {
         babyShower = map["babyShower"],
         tebrik = map['tebrik'],
         dogum = map["dogum"],
-        diger = map["diger"];
+        diger = map["diger"],
+        categoryID=map["categoryID"];
 
   @override
   String toString() {
-    return 'Mesaj{dogumGunu: $dogumGunu, yeniIs: $yeniIs, dugun: $dugun,terfi$terfi,nisan$nisan,babyShower$babyShower,tebrik$tebrik,dogum$dogum,diger$diger}';
+    return 'Mesaj{categoryID : $categoryID,dogumGunu: $dogumGunu, yeniIs: $yeniIs, dugun: $dugun,terfi$terfi,nisan$nisan,babyShower$babyShower,tebrik$tebrik,dogum$dogum,diger$diger}';
   }
 
   /* anaBilgi:
